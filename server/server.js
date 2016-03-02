@@ -1,9 +1,9 @@
 var http = require('http');
 var express = require('express');
-var app = express();
 var env = require('../.env');
+var app = express();
 
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/../client'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

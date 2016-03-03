@@ -1,0 +1,92 @@
+<script class='template' id='picTemplate' type='x-tmpl-mustache'>
+<div asset-id='{{id}}' class='asset asset-has-preview-{{has_preview}} asset-icon-{{ext}} asset-{{type}} {{#current}}current{{/current}} {{#selected}}selected{{/selected}} {{aspect}}' id='asset-{{id}}' onmouseout='Browse.assetUnHover({{id}}, event)' onmouseover='Browse.assetHover({{id}}, {{catalogue_number}}, event)' style='width:{{css_asset_size}}px; height:{{css_asset_size}}px'>
+<div class='filename'>{{filename}}</div>
+<div class='image' data-target='#asset-modal-{{catalogue_number}}' data-toggle='modal' href='/assets/{{catalogue_number}}' onclick="Browse.openAssetModal('{{catalogue_number}}')" style='width:{{css_image_width}}px; height:{{css_image_height}}px'>
+<table height='{{table_height}}' width='{{table_width}}'>
+<tr>
+<td align='center' valign='middle'>
+{{#is_doc}}
+{{#has_preview}}
+<img src='{{pic_url}}' style='transform: scale({{zoom}})'>
+{{/has_preview}}
+{{^has_preview}}
+<div class='doc-select-indicator'></div>
+{{/has_preview}}
+{{/is_doc}}
+{{^is_doc}}
+<img src='{{pic_url}}' style='transform: scale({{zoom}})'>
+{{/is_doc}}
+</td>
+</tr>
+</table>
+</div>
+<div class='asset-indicators'>
+<span class='asset-Type-icon'>
+<i class='fa fa-film'></i>
+<i class='fa fa-picture-o'></i>
+<i class='fa fa-file-o'></i>
+<i class='fa fa-file-audio-o'></i>
+<i class='type'>{{ext}}</i>
+</span>
+{{#expired}}
+<span class='expired'>
+<i class='fa fa-times'></i>
+<i class='fa fa-calendar-o'></i>
+</span>
+{{/expired}}
+<span class='curation-state {{curatedState}}'>
+{{#admin_rating}}
+<span class='curation-state-pending label label-default'>{{ratingDisplay}}</span>
+{{/admin_rating}}
+<span class='curation-state-accepted label label-success'>{{ratingDisplay}}</span>
+<span class='curation-state-rejected label label-danger'>{{ratingDisplay}}</span>
+</span>
+</div>
+<div class='asset-controls'>
+<input onchange='Browse.assetChecked({{id}})' type='checkbox' {{#selected}}checked{{/selected}}>
+</div>
+</div>
+</script>
+<script class='template' id='picHoveredTemplate' type='x-tmpl-mustache'>
+<div class='hover-details'>
+<p class='caption'>{{to_s}}</p>
+{{#photographer}}
+<p>
+<i class='fa fa-camera'></i>
+{{photographer}}
+</p>
+{{/photographer}}
+{{#copyright}}
+<p class='copy'>&copy;{{copyright}}</p>
+{{/copyright}}
+{{#usage_terms}}
+<h6>Use Terms</h6>
+<p>{{usage_terms}}</p>
+{{/usage_terms}}
+{{#location}}
+<h6>Location</h6>
+<p>{{location}}</p>
+{{/location}}
+{{#license_group}}
+<h6>License group</h6>
+<p>
+<i class='fa lock'></i>
+{{license_group.title}}
+</p>
+{{/license_group}}
+{{#families}}
+<h6>In Families</h6>
+<p>
+<i class='fa fa-child'></i>
+{{#families}}{{name}}{{/families}}
+</p>
+{{/families}}
+{{#families_as_parent}}
+<h6>Parent of Families</h6>
+<p>
+<i class='fa fa-child'></i>
+{{#families_as_parent}}{{name}}{{/families_as_parent}}
+</p>
+{{/families_as_parent}}
+</div>
+</script>
